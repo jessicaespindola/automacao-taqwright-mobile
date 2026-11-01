@@ -1,0 +1,34 @@
+{
+  "name": "taqwright-mobile",
+  "version": "1.0.0",
+  "description": "Automação mobile Android com Taqwright (Playwright runner + Appium 3) — Native Demo App",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "test": "taqwright test",
+    "test:login": "taqwright test tests/specs/login.spec.ts",
+    "test:forms": "taqwright test tests/specs/forms.spec.ts",
+    "test:navigation": "taqwright test tests/specs/navigation.spec.ts",
+    "report": "taqwright show-report",
+    "report:allure": "allure generate reports/allure-results -o reports/allure-report --clean",
+    "report:allure:open": "node scripts/serve-allure.mjs reports/allure-report",
+    "report:allure:full": "npm run report:allure && npm run report:allure:open",
+    "app:download": "node scripts/download-apk.mjs",
+    "doctor": "taqwright doctor",
+    "devices": "taqwright devices",
+    "codegen": "taqwright codegen"
+  },
+  "devDependencies": {
+    "@taqwright/taqwright": "^1.0.1",
+    "@types/node": "^24.5.2",
+    "allure-commandline": "^2.34.1",
+    "allure-playwright": "^3.4.1",
+    "appium": "^3.1.0",
+    "appium-uiautomator2-driver": "^5.0.0",
+    "dotenv": "^16.5.0",
+    "typescript": "^5.9.3"
+  }
+}

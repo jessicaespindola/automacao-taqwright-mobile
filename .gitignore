@@ -1,0 +1,31 @@
+# Dependências
+node_modules/
+
+# Segredos e máquina local (o .env.example sobe)
+.env
+.env.local
+.env.*.local
+
+# Logs de execução (s23-run.log, s23-confirm.log e outros)
+*.log
+
+# Binário do app — baixar com npm run app:download
+*.apk
+!apps/.gitkeep
+
+# Relatórios e artefatos gerados
+playwright-report/
+test-results/
+reports/
+blob-report/
+coverage/
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Sistema e editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
