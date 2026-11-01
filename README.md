@@ -379,103 +379,37 @@ O Taqwright é um runner. A [escrita de testes](https://www.taqwright.dev/docs/w
 
 ### Quem tem o quê
 
-Recorte da documentação. “Appium” aqui é o servidor e os drivers em [appium.io](https://appium.io/docs/en/latest/). “Taqwright” é o runner em [taqwright.dev](https://www.taqwright.dev/). O WebdriverIO deste desafio acrescenta espera e relatório por cima do Appium; isso está marcado quando muda a leitura.
+Uma linha por possibilidade. **Sim** está na documentação daquele produto. **Não** não está. Fontes: [Appium](https://appium.io/docs/en/latest/), [drivers](https://appium.io/docs/en/latest/ecosystem/drivers/) e [Taqwright](https://www.taqwright.dev/).
 
-#### Os dois têm
-
-| Possibilidade | Onde a doc coloca |
-|---|---|
-| Android nativo em emulador e em aparelho físico | UiAutomator2 nos dois. O Taqwright também cita Jetpack Compose, React Native, Expo e Ionic |
-| iOS e iPadOS em simulador e em aparelho físico | XCUITest nos dois. Simulador e WDA só existem no macOS |
-| Instalar, abrir, encerrar, mandar para o fundo e deep link | Comandos do driver. No Taqwright: `installApp`, `launchApp`, `terminateApp`, `backgroundApp`, `openDeepLink` |
-| Toque, texto, scroll, swipe, alerta, orientação, teclado, clipboard e geolocalização | Protocolo móvel do Appium. O Taqwright nomeia na API `mobile` (`swipe`, `pinchIn` / `pinchOut`, `dragTo`, `acceptAlert`, `setLocation`) |
-| Permissão, rede e locale no Android | Métodos do UiAutomator2. A doc do Taqwright marca `setPermission`, `setNetworkConnection` e `setLocale` como Android only |
-| Reset do app entre testes | `noReset` / `fullReset` no Appium. `resetBetweenTests` no Taqwright (desinstala e reinstala) |
-| Vários devices ao mesmo tempo | Várias sessões, ou [Selenium Grid](https://appium.io/docs/en/latest/guides/grid/), no Appium. `workers` + `device.pool` no Taqwright, um device por worker |
-| Nuvem (BrowserStack, LambdaTest e outros que falem o protocolo) | O cliente Appium aponta o host. O Taqwright tem `provider: 'browserstack'` e `'lambdatest'` no mesmo spec |
-| Gravação de tela | O driver grava. No simulador iOS os dois dependem de `ffmpeg` no Mac. No aparelho físico a gravação é no device |
-| iOS na nuvem | O protocolo XCUITest no provider. O exemplo do Taqwright é BrowserStack, iPhone 15, iOS 17 |
-
-#### Só o Appium tem
-
-| Possibilidade | Detalhe na doc |
-|---|---|
-| Cliente em Python, Java, Ruby e .NET, além de JavaScript | [Quickstart](https://appium.io/docs/en/latest/) traz um teste em cada uma. O Taqwright é JavaScript/TypeScript no runner do Playwright |
-| Escolher o runner | WebdriverIO, pytest, JUnit e outros. O Taqwright é o runner |
-| Espresso no Android | Driver oficial, ao lado do UiAutomator2. Vale celular, TV, Wear, XR e Automotive |
-| tvOS e watchOS | Entram no driver XCUITest. O site do Taqwright não descreve esses alvos |
-| Navegador | Drivers oficiais Chromium, Gecko e Safari |
-| Desktop | Mac2 no macOS. Windows com o driver oficial (WinAppDriver parado em 2022) ou o NovaWindows da comunidade |
-| Flutter pela árvore do Flutter | `appium-flutter-driver` da comunidade. O Taqwright cita Flutter só quando a UI vira componente nativo |
-| TV, Roku, Linux | Drivers de comunidade na [lista de drivers](https://appium.io/docs/en/latest/ecosystem/drivers/). Vários sem manutenção |
-| WebView como guia de uso | [Managing Contexts](https://appium.io/docs/en/latest/guides/context/): `NATIVE_APP` e um contexto por webview. A escrita de testes do Taqwright ensina o app nativo |
-| Plugins e protocolos à escolha | Plugins, BiDi, JSON Wire e o protocolo Appium, na referência do servidor |
-| Decidir o tamanho da sessão | O cliente abre e fecha. Neste desafio o WDIO abre uma sessão por arquivo |
-
-#### Só o Taqwright tem
-
-| Possibilidade | Detalhe na doc |
-|---|---|
-| Runner Playwright | `test`, `expect`, fixtures, projects, retries, HTML em `playwright-report/` |
-| Auto-wait dentro do produto | Ação espera o elemento visível e habilitado. `expect` tenta de novo a cada 200 ms. O servidor Appium não espera sozinho. O WDIO deste desafio espera via `waitforTimeout` e `expect-webdriverio` |
-| Locators no estilo Playwright, com ranking | `getByLabel`, `getByText`, `getByRole`, `filter`, `nth`. No iOS, `getByPredicate` e `getByClassChain`. O codegen ranqueia o locator na tela ao vivo |
-| Trace por ação e HAR | Screenshot + XML em `trace.html`, e rede no relatório HTML. Vídeo é opção à parte (`video`) |
-| Inspetor e codegen no CLI | `npx taqwright codegen`, `doctor`, `devices`, `show-report` |
-| Agente que devolve um spec | O site descreve o `lime-cli`. Não foi usado neste desafio |
-| `provider` no config | O mesmo arquivo troca emulador, device USB, BrowserStack e LambdaTest |
-| Teclado do simulador iOS ligado por padrão | `appium:forceSimulatorSoftwareKeyboardPresence: true`, com como desligar |
-
-#### Os dois não têm
-
-| Possibilidade | Por quê |
-|---|---|
-| Simulador ou iPhone local em Windows ou Linux | As duas docs exigem macOS e Xcode. Este notebook está fora |
-| Vários workers em um único aparelho | Appium: uma sessão ocupa o device. Taqwright: `workers` maior que o `device.pool` falha na hora |
-| Matchers de browser no celular | `toHaveScreenshot`, `toHaveCSS` e `toHaveTitle` são de web. A doc do Taqwright diz que disparam erro. O Appium não é essa API |
-| Nuvem própria | Os dois conectam num provider. Nenhum dos dois é o BrowserStack nem o LambdaTest |
-| Tizen de celular mantido | O driver Tizen da lista Appium parou em 2020 e só vale Appium 1. O Taqwright não lista Tizen |
-| iOS executado neste desafio | As duas suítes rodaram no Galaxy S23. O caminho iOS está só na documentação |
-
-### Plataformas e drivers
-
-| Alvo | Appium | Taqwright |
+| Possibilidade | Appium | Taqwright |
 |---|---|---|
-| Android nativo, híbrido e WebView | UiAutomator2 e Espresso. A doc inclui celular, TV, Wear, XR e Automotive | UiAutomator2. O site cita telefone e emulador, app nativo, Jetpack Compose, React Native, Expo, Flutter e Ionic |
-| iOS, iPadOS | XCUITest: nativo, híbrido e WebView. Exige Mac com Xcode | Mesma API `mobile`, driver XCUITest. Simulador e device físico na [configuração](https://www.taqwright.dev/docs/configuration). Local só em macOS 14+ |
-| tvOS e watchOS | XCUITest, na lista oficial de drivers | Fora do que o site descreve |
-| Navegador (Chrome, Edge, Firefox, Safari) | Drivers Chromium, Gecko e Safari | Fora do produto. O alvo é app móvel |
-| macOS e Windows desktop | Drivers Mac2 e Windows (o executável WinAppDriver da Microsoft parado em 2022; a doc aponta o NovaWindows da comunidade) | Fora do produto |
-| Flutter com árvore própria | Driver da comunidade `appium-flutter-driver` | O site lista Flutter quando a UI vira componente nativo. Não cita o driver Flutter |
-| TV, Roku, Tizen, Linux | Drivers oficiais e de comunidade, vários sem manutenção | Fora do produto |
+| Android nativo, emulador e aparelho físico | Sim | Sim |
+| iOS e iPadOS no macOS (simulador e aparelho físico) | Sim | Sim |
+| Instalar, abrir, encerrar, background e deep link | Sim | Sim |
+| Toque, texto, scroll, swipe, pinch, alerta, teclado | Sim | Sim |
+| Permissão, rede e locale no Android | Sim | Sim |
+| Reset do app entre testes | Sim | Sim |
+| Vários aparelhos em paralelo | Sim | Sim |
+| BrowserStack e LambdaTest | Sim | Sim |
+| Gravação de tela | Sim | Sim |
+| iOS na nuvem | Sim | Sim |
+| Python, Java, Ruby, .NET e escolha do runner | Sim | Não |
+| Espresso, tvOS, watchOS, navegador e desktop | Sim | Não |
+| Driver Flutter, TV, Roku e Linux | Sim | Não |
+| Guia de WebView ([contexts](https://appium.io/docs/en/latest/guides/context/)) | Sim | Não |
+| Plugins, BiDi e Selenium Grid | Sim | Não |
+| Runner Playwright, fixtures e HTML | Não | Sim |
+| Auto-wait e `expect` a cada 200 ms | Não | Sim |
+| `getByLabel` / `getByText` e codegen que ranqueia | Não | Sim |
+| Trace por ação e HAR | Não | Sim |
+| Agente `lime-cli` que devolve um spec | Não | Sim |
+| iOS local no Windows ou Linux | Não | Não |
+| Vários workers no mesmo aparelho | Não | Não |
+| `toHaveScreenshot` / CSS no celular | Não | Não |
+| Nuvem própria | Não | Não |
+| Tizen de celular mantido | Não | Não |
 
-Lista oficial de drivers: [Appium Drivers](https://appium.io/docs/en/latest/ecosystem/drivers/).
-
-### iOS
-
-Os dois usam XCUITest e, por baixo, o WebDriverAgent. A [introdução aos drivers](https://appium.io/docs/en/latest/intro/drivers/) descreve a pilha: teste → cliente → servidor Appium → driver XCUITest → WebDriverAgent → Xcode → iOS, e o simulador só existe no macOS.
-
-| | Appium | Taqwright |
-|---|---|---|
-| Onde roda local | macOS com Xcode. Windows e Linux não hospedam simulador iOS | Igual. A [instalação](https://www.taqwright.dev/docs/installation) marca Windows e Linux como Android only e pede macOS 14 (Sonoma) ou mais novo |
-| Simulador | `xcrun simctl`, driver sobe o WebDriverAgent. A doc deste repo cita a porta **8100** e a primeira compilação do WDA, que pode estourar o timeout | `provider: 'emulator'` também para simulador. O exemplo da doc usa `iPhone 17 Pro`, binário `.app` e bundle id próprio (no app de exemplo da Taqelah, `com.taqelah.demoApp`, diferente do pacote Android) |
-| iPhone físico | USB, assinatura e WDA no aparelho | `provider: 'local-device'` e UDID, no mesmo esquema do S23. Binário `.ipa` |
-| Nuvem | O cliente aponta o servidor para o provider (BrowserStack, LambdaTest e outros falam o protocolo) | Projeto com `provider: 'browserstack'` ou `'lambdatest'`. O exemplo iOS da doc é BrowserStack, `iPhone 15` / iOS 17, app `bs://` ou `.ipa` |
-| Locator rápido | Predicate e class chain no XCUITest; XPath existe e é o mais caro | A escrita de testes coloca `getByPredicate` e `getByClassChain` como estratégias iOS, e XPath por último |
-| Vídeo | Gravação no device ou via ffmpeg no simulador, conforme o driver | Simulador precisa de `ffmpeg` no PATH. iPhone físico grava no aparelho. `video: 'off'` não inicia a gravação |
-| Teclado no simulador | Capability do XCUITest | A doc liga `appium:forceSimulatorSoftwareKeyboardPresence: true` e permite desligar em `capabilities` |
-| Neste PC | Não executado | Não executado. Um projeto `ios` no `taqwright.config.ts` faria o `npm test` tentar o simulador no Windows |
-
-### Android, sessão e isolamento
-
-| | Appium + o cliente | Taqwright |
-|---|---|---|
-| Como a sessão nasce | O cliente cria a sessão e decide quando encerrar. No WDIO deste desafio, uma sessão por arquivo de spec | A [escrita de testes](https://www.taqwright.dev/docs/writing-tests) diz que o worker segura uma sessão e que, por padrão, ela segue entre os testes desse worker. O exemplo do primeiro teste também diz que o fixture abre e fecha a sessão no teste |
-| O que esta instalação fez | 3 sessões, 18 testes, **2 min 18 s** | `@taqwright/taqwright` 1.0.1 abriu uma sessão por teste. Com o `freshApp`, a suíte ficou em **4,9–5,0 min** |
-| App limpo entre testes | Capability `noReset` / `fullReset`. Aqui, `noReset: false` uma vez por sessão | `resetBetweenTests: true` desinstala e reinstala (`buildPath` + `appBundleId` obrigatórios). `false` deixa o app no estado em que o teste anterior parou |
-| Híbrido / WebView | Guia [Managing Contexts](https://appium.io/docs/en/latest/guides/context/): nativo e webview na mesma sessão. No XCUITest, cada webview é um contexto | A superfície descrita na escrita de testes é o app nativo |
-| Permissão, rede e locale | Métodos do UiAutomator2 | `setPermission`, `setNetworkConnection` e `setLocale` estão na API e a doc marca como Android only |
-
-O recorte em quatro grupos está em [Quem tem o quê](#quem-tem-o-quê). As tabelas acima detalham plataforma, iOS e sessão.
+iOS local pede macOS e Xcode nos dois. Neste notebook as duas suítes rodaram só no Galaxy S23. O tempo medido está em [Tempo no mesmo Galaxy S23](#tempo-no-mesmo-galaxy-s23). O servidor Appium não espera o elemento sozinho; o WebdriverIO deste desafio espera com `waitforTimeout`.
 
 ---
 
